@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.hqawesomeapp.placeholder.PlaceholderContent.PlaceholderItem
-import com.example.hqawesomeapp.databinding.FragmentHQBinding
+import com.example.hqawesomeapp.databinding.FragmentItemBinding
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
@@ -20,7 +20,7 @@ class MyhqRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentHQBinding.inflate(
+            FragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -37,7 +37,7 @@ class MyhqRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentHQBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val idView: TextView = binding.itemNumber
         val contentView: TextView = binding.content
 

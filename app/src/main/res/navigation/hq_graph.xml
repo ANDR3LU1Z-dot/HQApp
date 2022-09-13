@@ -9,7 +9,7 @@
         android:id="@+id/HQFragment"
         android:name="com.example.hqawesomeapp.HQFragment"
         android:label="fragment_h_q_list"
-        tools:layout="@layout/fragment_h_q_list" >
+        tools:layout="@layout/fragment_item_list" >
         <action
             android:id="@+id/action_HQFragment_to_HQDetailsFragment"
             app:destination="@id/HQDetailsFragment" />
