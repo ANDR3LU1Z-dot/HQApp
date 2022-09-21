@@ -9,10 +9,6 @@ import android.widget.TextView
 import com.example.hqawesomeapp.placeholder.PlaceholderContent.PlaceholderItem
 import com.example.hqawesomeapp.databinding.FragmentItemBinding
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 
 interface HQItemListener{
     fun onItemSelected(position: Int)
@@ -36,8 +32,8 @@ class MyhqRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.bind(item)
+
 
         holder.view.setOnClickListener{
             listener.onItemSelected(position)
@@ -47,14 +43,14 @@ class MyhqRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val view: View = binding.root
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+        fun bind(item: PlaceholderItem){
+            binding.hqItem = item
+            binding.executePendingBindings()
         }
+
     }
 
 }
