@@ -1,71 +1,60 @@
 package com.example.hqawesomeapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import com.example.hqawesomeapp.placeholder.PlaceholderContent
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.hqawesomeapp.databinding.FragmentItemListBinding
 
 /**
  * A fragment representing a list of Items.
  */
 class HQFragment : Fragment(), HQItemListener {
 
-    private var columnCount = 1
-
+    private lateinit var adapter: MyhqRecyclerViewAdapter
     private val viewModel by navGraphViewModels<HQViewModel>(R.id.hq_graph){defaultViewModelProviderFactory}
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
+    ): View {
+        val binding = FragmentItemListBinding.inflate(inflater)
+        val view = binding.root as RecyclerView
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyhqRecyclerViewAdapter(PlaceholderContent.ITEMS, this@HQFragment)
-            }
+        adapter = MyhqRecyclerViewAdapter(this)
+
+        view.apply {
+            this.adapter = this@HQFragment.adapter
+            this.layoutManager = LinearLayoutManager(context)
         }
+
+        initObservers()
         return view
     }
 
+    private fun initObservers(){
+        viewModel.hqListLiveData.observe(viewLifecycleOwner, Observer {
+            adapter.updateData(it)
+        })
+
+        viewModel.navigationToDetailsLiveData.observe(viewLifecycleOwner, Observer{
+                val action = HQFragmentDirections.actionHQFragmentToHQDetailsFragment()
+                findNavController().navigate(action)
+        })
+    }
+
     override fun onItemSelected(position: Int) {
-        findNavController().navigate(R.id.HQDetailsFragment)
+        viewModel.onHQSelected(position)
     }
 
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            HQFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
 
 
 }
