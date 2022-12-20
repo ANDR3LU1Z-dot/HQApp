@@ -1,8 +1,9 @@
-package com.example.hqawesomeapp
+package com.example.hqawesomeapp.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.hqawesomeapp.hqDetails.HQDetails
 import com.example.hqawesomeapp.placeholder.PlaceholderContent
 import com.example.hqawesomeapp.placeholder.PlaceholderContent.PlaceholderItem
 
