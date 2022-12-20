@@ -1,4 +1,4 @@
-package com.example.hqawesomeapp
+package com.example.hqawesomeapp.hqHome
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hqawesomeapp.viewModel.HQViewModel
+import com.example.hqawesomeapp.R
 import com.example.hqawesomeapp.databinding.FragmentItemListBinding
 
 /**
