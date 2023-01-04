@@ -5,7 +5,7 @@
     <data>
         <variable
             name="hqItem"
-            type="com.example.hqawesomeapp.placeholder.PlaceholderContent.PlaceholderItem" />
+            type="com.example.hqawesomeapp.data.Comic" />
     </data>
 
     <LinearLayout
@@ -42,7 +42,7 @@
                     android:layout_marginTop="20dp"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="#FFFFFF"
-                    android:text="@{hqItem.id}"
+                    android:text="@{hqItem.idString}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"

@@ -1,11 +1,10 @@
 package com.example.hqawesomeapp.hqHome
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.example.hqawesomeapp.placeholder.PlaceholderContent.PlaceholderItem
+import androidx.recyclerview.widget.RecyclerView
+import com.example.hqawesomeapp.data.Comic
 import com.example.hqawesomeapp.databinding.FragmentItemBinding
 
 
@@ -16,11 +15,10 @@ class MyhqRecyclerViewAdapter(
     private val listener: HQItemListener
 ) : RecyclerView.Adapter<MyhqRecyclerViewAdapter.ViewHolder>() {
 
-    private val values: MutableList<PlaceholderItem> = ArrayList()
+    private var values: List<Comic> = ArrayList()
 
-    fun updateData(hqList: List<PlaceholderItem>){
-        values.clear()
-        values.addAll(hqList)
+    fun updateData(hqList: List<Comic>){
+        values = hqList
         notifyDataSetChanged()
     }
 
@@ -53,7 +51,7 @@ class MyhqRecyclerViewAdapter(
     inner class ViewHolder(val binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val view: View = binding.root
 
-        fun bind(item: PlaceholderItem){
+        fun bind(item: Comic){
             binding.hqItem = item
             binding.executePendingBindings()
         }
