@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.navGraphViewModels
-import com.example.hqawesomeapp.viewModel.HQViewModel
+import com.example.hqawesomeapp.HQViewModel
 import com.example.hqawesomeapp.R
 import com.example.hqawesomeapp.databinding.FragmentHQDetailsBinding
 

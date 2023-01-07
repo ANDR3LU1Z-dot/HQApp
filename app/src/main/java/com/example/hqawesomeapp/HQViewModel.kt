@@ -1,14 +1,11 @@
-package com.example.hqawesomeapp.viewModel
+package com.example.hqawesomeapp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.hqawesomeapp.ApiCredentials
-import com.example.hqawesomeapp.ApiHelper
-import com.example.hqawesomeapp.ComicService
 import com.example.hqawesomeapp.data.Comic
 import com.example.hqawesomeapp.data.ComicResponse
+import com.example.hqawesomeapp.data.DataState
 import com.example.hqawesomeapp.hqDetails.HQDetails
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +26,10 @@ class HQViewModel : ViewModel() {
     private val hqListMTLiveData =
         MutableLiveData<List<Comic>?>()
 
+    val appState: LiveData<DataState>
+        get() = _appState
+    private val _appState = MutableLiveData<DataState>()
+
     val navigationToDetailsLiveData
         get() = navigationToDetailMTLiveData
 
@@ -42,6 +43,7 @@ class HQViewModel : ViewModel() {
     private val comicService = retrofit.create(ComicService::class.java)
 
     init {
+        _appState.postValue(DataState.Loading)
         getHQData()
     }
 
@@ -60,12 +62,14 @@ class HQViewModel : ViewModel() {
             override fun onResponse(call: Call<ComicResponse>, response: Response<ComicResponse>) {
                 if(response.isSuccessful){
                     hqListMTLiveData.postValue(response.body()?.data?.results)
-                    Log.d("resposta", "conectado")
+                    _appState.postValue(DataState.Success)
+                } else {
+                    _appState.postValue(DataState.Error)
                 }
             }
 
             override fun onFailure(call: Call<ComicResponse>, t: Throwable) {
-                Log.d("resposta", "desconectado")
+                _appState.postValue(DataState.Error)
             }
 
         })

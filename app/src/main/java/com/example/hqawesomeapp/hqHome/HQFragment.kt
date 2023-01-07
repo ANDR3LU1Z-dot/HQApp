@@ -9,8 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.hqawesomeapp.viewModel.HQViewModel
+import com.example.hqawesomeapp.HQViewModel
 import com.example.hqawesomeapp.R
 import com.example.hqawesomeapp.databinding.FragmentItemListBinding
 
@@ -29,11 +28,16 @@ class HQFragment : Fragment(), HQItemListener {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentItemListBinding.inflate(inflater)
-        val view = binding.root as RecyclerView
+
+        val view = binding.root
+        val recyclerView = binding.list
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         adapter = MyhqRecyclerViewAdapter(this)
 
-        view.apply {
+        recyclerView.apply {
             this.adapter = this@HQFragment.adapter
             this.layoutManager = LinearLayoutManager(context)
         }
