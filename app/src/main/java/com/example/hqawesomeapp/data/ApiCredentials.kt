@@ -1,4 +1,4 @@
-package com.example.hqawesomeapp
+package com.example.hqawesomeapp.data
 
 class ApiCredentials {
     companion object{

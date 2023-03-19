@@ -13,15 +13,10 @@ import com.example.hqawesomeapp.HQViewModel
 import com.example.hqawesomeapp.R
 import com.example.hqawesomeapp.databinding.FragmentItemListBinding
 
-/**
- * A fragment representing a list of Items.
- */
 class HQFragment : Fragment(), HQItemListener {
 
-    private lateinit var adapter: MyhqRecyclerViewAdapter
+    private lateinit var adapter: HQListAdapter
     private val viewModel by navGraphViewModels<HQViewModel>(R.id.hq_graph){defaultViewModelProviderFactory}
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +30,7 @@ class HQFragment : Fragment(), HQItemListener {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        adapter = MyhqRecyclerViewAdapter(this)
+        adapter = HQListAdapter(this)
 
         recyclerView.apply {
             this.adapter = this@HQFragment.adapter
@@ -54,15 +49,15 @@ class HQFragment : Fragment(), HQItemListener {
         })
 
         viewModel.navigationToDetailsLiveData.observe(viewLifecycleOwner, Observer{
-                val action = HQFragmentDirections.actionHQFragmentToHQDetailsFragment()
-                findNavController().navigate(action)
+                it.getContentIfNotHandled()?.let {
+                    val action = HQFragmentDirections.actionHQFragmentToHQDetailsFragment()
+                    findNavController().navigate(action)
+                }
         })
     }
 
     override fun onItemSelected(position: Int) {
         viewModel.onHQSelected(position)
     }
-
-
 
 }

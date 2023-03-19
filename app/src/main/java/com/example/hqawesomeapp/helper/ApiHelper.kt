@@ -1,4 +1,4 @@
-package com.example.hqawesomeapp
+package com.example.hqawesomeapp.helper
 
 import java.math.BigInteger
 import java.security.MessageDigest

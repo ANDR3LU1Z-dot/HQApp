@@ -11,9 +11,9 @@ import com.example.hqawesomeapp.databinding.FragmentItemBinding
 interface HQItemListener{
     fun onItemSelected(position: Int)
 }
-class MyhqRecyclerViewAdapter(
+class HQListAdapter(
     private val listener: HQItemListener
-) : RecyclerView.Adapter<MyhqRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HQListAdapter.ViewHolder>() {
 
     private var values: List<Comic> = ArrayList()
 
