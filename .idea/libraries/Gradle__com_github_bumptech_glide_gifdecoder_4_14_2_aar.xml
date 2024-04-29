@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.github.bumptech.glide:gifdecoder:4.14.2@aar">
+  <library name="Gradle: com.github.bumptech.glide:gifdecoder:4.14.2@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a51d9e28105d29131732714c068eb56e/transformed/gifdecoder-4.14.2/annotations.zip!/" />
     </ANNOTATIONS>
